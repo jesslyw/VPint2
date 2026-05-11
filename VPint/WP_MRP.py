@@ -139,7 +139,7 @@ class WP_SMRP(SMRP):
             feature_size = self.feature_grid.shape[2]
 
             shp = self.feature_grid.shape
-            size = np.product(shp)
+            size = np.prod(shp)
             f_grid = self.feature_grid.reshape(size)
             f_grid[f_grid==0] = 0.01
             f_grid = f_grid.reshape(shp)
@@ -271,7 +271,7 @@ class WP_SMRP(SMRP):
                     priority_grid3[:,:,d] = sub_MRP.run()
                 priority_grid = np.multiply(priority_grid,priority_grid3)
                 # Smooth for 0
-                priority_vec = priority_grid.reshape(np.product(priority_grid.shape))
+                priority_vec = priority_grid.reshape(np.prod(priority_grid.shape))
                 priority_vec[priority_vec==0] = 0.01
                 priority_grid = priority_vec.reshape(priority_grid.shape)
         
@@ -332,7 +332,7 @@ class WP_SMRP(SMRP):
                 
                 # Flatten arrays
                 shp = new_grid.shape
-                size = np.product(shp)
+                size = np.prod(shp)
                 new_grid_vec = new_grid.reshape(size)
                 pred_grid_vec = self.pred_grid.reshape(size)
                 
@@ -442,7 +442,7 @@ class WP_SMRP(SMRP):
             sub_grid = self.original_grid.copy()
 
             shp = sub_grid.shape
-            size = np.product(shp)
+            size = np.prod(shp)
 
             rand_vec = np.random.rand(size)
             sub_vec = sub_grid.reshape(size)
@@ -456,7 +456,7 @@ class WP_SMRP(SMRP):
             diff = np.absolute(self.original_grid - np.mean(self.feature_grid,axis=2))
             
             shp = sub_grid.shape
-            size = np.product(shp)
+            size = np.prod(shp)
 
             diff_vec = diff.reshape(size)
             sub_vec = sub_grid.reshape(size)
@@ -476,7 +476,7 @@ class WP_SMRP(SMRP):
             contrast_grid = self.contrast_map(sub_grid)
             
             shp = sub_grid.shape
-            size = np.product(shp)
+            size = np.prod(shp)
 
             contrast_vec = contrast_grid.reshape(size)
             sub_vec = sub_grid.reshape(size)
@@ -561,7 +561,7 @@ class WP_SMRP(SMRP):
                     pred_grid = temp_MRP.run(resistance=True, epsilon=vals['epsilon'],mu=mu, auto_adapt=False)
 
                 # Compute MAE of subsampled predictions
-                mae = np.nanmean(np.absolute(pred_grid.reshape(np.product(pred_grid.shape)) - self.original_grid.reshape(np.product(self.original_grid.shape))))
+                mae = np.nanmean(np.absolute(pred_grid.reshape(np.prod(pred_grid.shape)) - self.original_grid.reshape(np.prod(self.original_grid.shape))))
 
                 # Update where necessary
                 if(mae < best_loss):
@@ -586,7 +586,7 @@ class WP_SMRP(SMRP):
                                         auto_adapt=False)
 
                 # Compute MAE of subsampled predictions
-                mae = np.nanmean(np.absolute(pred_grid.reshape(np.product(pred_grid.shape)) - self.original_grid.reshape(np.product(self.original_grid.shape))))
+                mae = np.nanmean(np.absolute(pred_grid.reshape(np.prod(pred_grid.shape)) - self.original_grid.reshape(np.prod(self.original_grid.shape))))
 
                 if(mae < best_loss):
                     best_val = val
@@ -635,7 +635,7 @@ class WP_SMRP(SMRP):
                                         prioritise_identity=True, priority_intensity=best_beta)
 
                 # Compute MAE of subsampled predictions
-                mae = np.nanmean(np.absolute(pred_grid.reshape(np.product(pred_grid.shape)) - self.original_grid.reshape(np.product(self.original_grid.shape))))
+                mae = np.nanmean(np.absolute(pred_grid.reshape(np.prod(pred_grid.shape)) - self.original_grid.reshape(np.prod(self.original_grid.shape))))
 
                 # Update where necessary
                 if(mae < best_loss):
@@ -717,7 +717,7 @@ class WP_SMRP(SMRP):
                     pred_grid = temp_MRP.run(resistance=True, epsilon=vals['epsilon'],mu=mu, auto_adapt=False)
 
                 # Compute MAE of subsampled predictions
-                mae = np.nanmean(np.absolute(pred_grid.reshape(np.product(pred_grid.shape)) - self.original_grid.reshape(np.product(self.original_grid.shape))))
+                mae = np.nanmean(np.absolute(pred_grid.reshape(np.prod(pred_grid.shape)) - self.original_grid.reshape(np.prod(self.original_grid.shape))))
 
                 # Update where necessary
                 if(mae < best_loss):
@@ -773,7 +773,7 @@ class WP_SMRP(SMRP):
             sub_grid = self.original_grid.copy()
 
             shp = sub_grid.shape
-            size = np.product(shp)
+            size = np.prod(shp)
 
             rand_vec = np.random.rand(size)
             sub_vec = sub_grid.reshape(size)
@@ -787,7 +787,7 @@ class WP_SMRP(SMRP):
             diff = np.absolute(self.original_grid - np.mean(self.feature_grid,axis=2))
             
             shp = sub_grid.shape
-            size = np.product(shp)
+            size = np.prod(shp)
 
             diff_vec = diff.reshape(size)
             sub_vec = sub_grid.reshape(size)
@@ -807,7 +807,7 @@ class WP_SMRP(SMRP):
             contrast_grid = self.contrast_map(sub_grid)
             
             shp = sub_grid.shape
-            size = np.product(shp)
+            size = np.prod(shp)
 
             contrast_vec = contrast_grid.reshape(size)
             sub_vec = sub_grid.reshape(size)
@@ -840,7 +840,7 @@ class WP_SMRP(SMRP):
                 pred_grid = temp_MRP.run(prioritise_identity=True,priority_intensity=val,iterations=max_sub_iter)
 
                 # Compute MAE of subsampled predictions
-                mae = np.nanmean(np.absolute(pred_grid.reshape(np.product(pred_grid.shape)) - self.original_grid.reshape(np.product(self.original_grid.shape))))
+                mae = np.nanmean(np.absolute(pred_grid.reshape(np.prod(pred_grid.shape)) - self.original_grid.reshape(np.prod(self.original_grid.shape))))
 
                 if(mae < best_loss):
                     best_val = val
@@ -854,7 +854,7 @@ class WP_SMRP(SMRP):
             pred_grid = temp_MRP.run(prioritise_identity=True,priority_intensity=val,iterations=max_sub_iter)
 
             # Compute MAE of subsampled predictions
-            mae = np.nanmean(np.absolute(pred_grid.reshape(np.product(pred_grid.shape)) - self.original_grid.reshape(np.product(self.original_grid.shape))))
+            mae = np.nanmean(np.absolute(pred_grid.reshape(np.prod(pred_grid.shape)) - self.original_grid.reshape(np.prod(self.original_grid.shape))))
 
             if(mae < best_loss):
                 best_val = val
@@ -869,7 +869,7 @@ class WP_SMRP(SMRP):
                 pred_grid = temp_MRP.run(prioritise_identity=True,priority_intensity=val,iterations=max_sub_iter)
 
                 # Compute MAE of subsampled predictions
-                mae = np.nanmean(np.absolute(pred_grid.reshape(np.product(pred_grid.shape)) - self.original_grid.reshape(np.product(self.original_grid.shape))))
+                mae = np.nanmean(np.absolute(pred_grid.reshape(np.prod(pred_grid.shape)) - self.original_grid.reshape(np.prod(self.original_grid.shape))))
 
                 if(mae < best_loss):
                     best_val = val
@@ -1241,7 +1241,7 @@ class WP_SMRP(SMRP):
                     conf_grid_final = cv2.filter2D(src=conf_grid_final, ddepth=-1, kernel=kernel)
             
         
-        sz = np.product(conf_grid.shape)
+        sz = np.prod(conf_grid.shape)
         shp = conf_grid.shape
         conf_grid_final_vec = conf_grid_final.reshape(sz)
         mask_vec = self.original_grid.copy().reshape(sz)

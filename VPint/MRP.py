@@ -68,7 +68,7 @@ class MRP:
         
         pred_grid = self.original_grid.copy()
         shp = pred_grid.shape
-        size = np.product(pred_grid.shape)
+        size = np.prod(pred_grid.shape)
         
         if(init_strategy=='mean'):
             mean = np.nanmean(pred_grid)
@@ -104,8 +104,8 @@ class MRP:
         :param mask: binary mask (0/1) of the same shape as grid, where 1 denotes missing values
         :returns: target grid with missing values as specified by the mask"""
         shp = grid.shape
-        grid_vec = grid.reshape(np.product(grid.shape))
-        mask_vec = grid.reshape(np.product(mask.shape))
+        grid_vec = grid.reshape(np.prod(grid.shape))
+        mask_vec = grid.reshape(np.prod(mask.shape))
         if(grid.shape != mask.shape):
             raise VPintError("Target and mask grids have different shapes: " + str(grid.shape) + " and " + str(mask.shape))
         grid_vec[mask_vec==1] = np.nan
